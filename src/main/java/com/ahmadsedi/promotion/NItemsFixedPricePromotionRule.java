@@ -1,7 +1,5 @@
 package com.ahmadsedi.promotion;
 
-import java.util.Map;
-
 /**
  * @author Ahmad R. Seddighi (ahmadseddighi@yahoo.com)
  * Date: 6/12/25
