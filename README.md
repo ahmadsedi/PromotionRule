@@ -1,5 +1,6 @@
 # Promotion Engine
    PromotionRule is a simple promotion engine for a checkout process in a shop. Our Cart contains a list of single character SKU ids (A, B, C.	) over which the promotion engine will need to run.
+   The aim of this practice is to improve functional programming skill in Java! 
 ## Features
    The promotion engine will need to calculate the total order value after applying the 2 promotion types: <br>
    - buy 'n' items of a SKU for a fixed price (3 A's for 130)
