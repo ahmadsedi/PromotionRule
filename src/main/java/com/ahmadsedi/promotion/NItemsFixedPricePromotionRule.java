@@ -13,30 +13,22 @@ import java.util.Map;
 
 public class NItemsFixedPricePromotionRule implements PromotionRule{
     Integer number;
-    Character unit;
+    String name;
     Integer value;
 
-    public NItemsFixedPricePromotionRule(Integer number, Character unit, Integer value) {
+    public NItemsFixedPricePromotionRule(Integer number, String name, Integer value) {
         this.number = number;
-        this.unit = unit;
+        this.name = name;
         this.value = value;
     }
 
-    public int consume(Map<Character, Integer> items) {
-        if(items.size()==0){
-            return 0;
-        }
-        Integer count = items.get(unit);
-        if(count!=null && count >= number) {
-            int newCount = count % number;
-            if (newCount == 0) {
-                items.remove(unit);
-            } else {
-                items.put(unit, count % number);
-            }
-            return (count / number) * value;
-        }else{
-            return 0;
-        }
+    @Override
+    public int consume(String itemName, Integer number, Integer itemPrice) {
+        return (number/this.number)*value+(number%this.number)*itemPrice;
+    }
+
+    @Override
+    public boolean test(String name) {
+        return this.name.equals(name);
     }
 }

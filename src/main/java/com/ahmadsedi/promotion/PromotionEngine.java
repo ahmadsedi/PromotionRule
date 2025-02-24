@@ -7,40 +7,31 @@ import java.util.Map;
  * @author Ahmad R. Seddighi (ahmadseddighi@yahoo.com)
  * Date: 6/12/25
  * Time: 10:47 AM
- *
+ * <p>
  * The {@code PromotionEngine} is the main class in promotion calculation task. It accepts a list of PromotionRule and
  * then provide a process method to calculate promotion value based on a scenario.
- *
  */
 
 public class PromotionEngine {
 
-    List<Sku> skus;
-    List<PromotionRule> promotionRules;
+    private Map<String, Item> itemMap;
+    private List<PromotionRule> promotionRules;
 
-    public PromotionEngine(List<Sku> skus, List<PromotionRule> promotionRules) {
-        this.skus = skus;
+    public PromotionEngine(Map<String, Item> itemMap, List<PromotionRule> promotionRules) {
+        this.itemMap = itemMap;
         this.promotionRules = promotionRules;
     }
 
     /**
      * Returns the promotion value of a scenario based on the promotionsRules.
      *
-     * @param scenario is a map of Character/Integer which represents a scenario
+     * @param basket is a map of Character/Integer which represents a scenario
      * @return the value of promotion
      */
-    public int process(Map<Character, Integer> scenario){
-        int total = 0;
-        for(PromotionRule promotionRule:promotionRules){
-            total = total + promotionRule.consume(scenario);
-        }
-        for(Sku sku:skus){
-            Integer number = scenario.get(sku.getUnit());
-            if(number!=null){
-                total= total + (number*sku.getPrice());
-            }
-        }
-        return total;
+    public int process(Map<String, Integer> basket) {
+        int rulesAppliedSum = basket.keySet().stream().filter(c -> promotionRules.stream().anyMatch(rule -> rule.test(c))).mapToInt(c -> promotionRules.stream().mapToInt(r -> r.consume(c, basket.get(c), itemMap.get(c).getPrice())).sum()).sum();
+        int rulesNotAppliedSum = basket.keySet().stream().filter(c -> promotionRules.stream().noneMatch(rule -> rule.test(c))).mapToInt(c -> itemMap.get(c).getPrice() * basket.get(c)).sum();
+        return rulesAppliedSum + rulesNotAppliedSum;
     }
 
 

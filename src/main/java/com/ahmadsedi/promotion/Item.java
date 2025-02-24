@@ -10,28 +10,20 @@ package com.ahmadsedi.promotion;
  *
  */
 
-public class Sku {
-    Character unit;
+public class Item {
+    String name;
     Integer price;
 
-    public Sku(Character unit, Integer price) {
-        this.unit = unit;
+    public Item(String name, Integer price) {
+        this.name = name;
         this.price = price;
     }
 
-    public Character getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Character unit) {
-        this.unit = unit;
+    public String getName() {
+        return name;
     }
 
     public Integer getPrice() {
         return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
     }
 }
