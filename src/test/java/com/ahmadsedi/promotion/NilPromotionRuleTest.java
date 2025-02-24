@@ -12,12 +12,12 @@ import java.util.*;
  * Time: 10:56 AM
  */
 
-public class NilPromotionRuleTest {
+class NilPromotionRuleTest {
 
     static PromotionEngine promotionEngine ;
 
     @BeforeAll
-    public static void setup(){
+    static void setup(){
         Map<String, Item> itemMap = new HashMap<>();
         itemMap.put("A", new Item("A", 50));
         itemMap.put("B", new Item("B", 30));
@@ -31,7 +31,7 @@ public class NilPromotionRuleTest {
     }
 
     @Test
-    public void process_givenABasket_returnSummary(){
+    void process_givenABasket_returnSummary(){
         Map<String, Integer> basket = new HashMap<>();
         basket.put("A", 1);
         basket.put("B", 1);

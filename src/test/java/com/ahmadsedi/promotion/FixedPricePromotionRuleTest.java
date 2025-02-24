@@ -15,12 +15,12 @@ import java.util.Map;
  * Time: 11:28 AM
  */
 
-public class FixedPricePromotionRuleTest {
+class FixedPricePromotionRuleTest {
 
     static PromotionEngine promotionEngine ;
 
     @BeforeAll
-    public static void setup(){
+    static void setup(){
         Map<String, Item> merchandises = new HashMap<>();
         merchandises.put("A", new Item("A", 50));
         merchandises.put("B", new Item("B", 30));
@@ -34,14 +34,14 @@ public class FixedPricePromotionRuleTest {
     }
 
     @Test
-    public void process_givenItemCompliedWithRule_returnAppliedRuleValue(){
+    void process_givenItemCompliedWithRule_returnAppliedRuleValue(){
         Map<String, Integer> basket = new HashMap<>();
         basket.put("A", 3);
         Assertions.assertEquals(130, promotionEngine.process(basket));
     }
 
     @Test
-    public void process_givenEmptyBasket_returnZero(){
+    void process_givenEmptyBasket_returnZero(){
         Map<String, Integer> basket = new HashMap<>();
         Assertions.assertEquals(0, promotionEngine.process(basket));
     }

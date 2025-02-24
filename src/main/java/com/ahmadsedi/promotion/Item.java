@@ -11,8 +11,8 @@ package com.ahmadsedi.promotion;
  */
 
 public class Item {
-    String name;
-    Integer price;
+    private final String name;
+    private final Integer price;
 
     public Item(String name, Integer price) {
         this.name = name;

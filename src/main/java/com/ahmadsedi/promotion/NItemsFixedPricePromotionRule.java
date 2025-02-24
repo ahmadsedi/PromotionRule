@@ -12,9 +12,9 @@ import java.util.Map;
  */
 
 public class NItemsFixedPricePromotionRule implements PromotionRule{
-    Integer number;
-    String name;
-    Integer value;
+    private final Integer number;
+    private final String name;
+    private final Integer value;
 
     public NItemsFixedPricePromotionRule(Integer number, String name, Integer value) {
         this.number = number;

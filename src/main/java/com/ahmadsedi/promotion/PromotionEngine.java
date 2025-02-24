@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class PromotionEngine {
 
-    private Map<String, Item> itemMap;
-    private List<PromotionRule> promotionRules;
+    private final Map<String, Item> itemMap;
+    private final List<PromotionRule> promotionRules;
 
     public PromotionEngine(Map<String, Item> itemMap, List<PromotionRule> promotionRules) {
         this.itemMap = itemMap;
