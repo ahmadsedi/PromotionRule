@@ -29,10 +29,13 @@ public class PromotionEngine {
      * @return the value of promotion
      */
     public int process(Map<String, Integer> basket) {
-        int rulesAppliedSum = basket.keySet().stream().filter(c -> promotionRules.stream().anyMatch(rule -> rule.test(c))).mapToInt(c -> promotionRules.stream().mapToInt(r -> r.consume(c, basket.get(c), itemMap.get(c).getPrice())).sum()).sum();
-        int rulesNotAppliedSum = basket.keySet().stream().filter(c -> promotionRules.stream().noneMatch(rule -> rule.test(c))).mapToInt(c -> itemMap.get(c).getPrice() * basket.get(c)).sum();
-        return rulesAppliedSum + rulesNotAppliedSum;
+         return basket.keySet().stream().mapToInt(c -> {
+                    if (promotionRules.stream().anyMatch(rule -> rule.test(c))) {
+                        return promotionRules.stream().mapToInt(r -> r.consume(c, basket.get(c), itemMap.get(c).getPrice())).sum();
+                    } else {
+                        return itemMap.get(c).getPrice() * basket.get(c);
+                    }
+                }
+        ).sum();
     }
-
-
 }
